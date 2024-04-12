@@ -1,5 +1,9 @@
 /*  2024-04-09 07:27:30
 
+2024-04-12 08:00:07
+여기서도 마찬가지.. 
+Input 컴포넌트와의 타입 소통에 오류가 난다. 
+zod 스키마에 문제인 것 같은데, 어떻게 해결해야 할 지, 난감한 상황.. 
 
 */
 
@@ -14,23 +18,14 @@ import {
   FormMessage,
 } from "./ui/form";
 import { Input } from "./ui/input";
+import { FormFieldProps } from "./SignupForm";
 
-export type SignupFormFieldProps = {
-  name: FieldPath<FormSchemaType>;
-  label: string;
-  placeholder: string;
-  description?: string;
-  inputType?: string;
-  formControl: Control<FormSchemaType, any>;
-  errors: FieldErrors<FieldValues>;
-};
-
-export const SignupFormField: React.FC<SignupFormFieldProps> = ({
+export const SignupFormField: React.FC<FormFieldProps> = ({
   name,
   label,
   placeholder,
   description,
-  inputType,
+  fetching,
   formControl,
   errors,
 }) => {
@@ -45,9 +40,11 @@ export const SignupFormField: React.FC<SignupFormFieldProps> = ({
           <FormLabel>{label}</FormLabel>
           <FormControl>
             <Input
-              placeholder={placeholder}
-              type={inputType || "text"}
+              disabled={fetching ? true : undefined}
               {...field}
+              placeholder={placeholder}
+              defaultValue={field.value} // defaultValue prop으로 변경
+              // disabled={field.disabled}
             />
           </FormControl>
           {/* {description && <FormDescription>{description}</FormDescription>} */}
