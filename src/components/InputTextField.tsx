@@ -18,9 +18,13 @@ import {
   FormMessage,
 } from "./ui/form";
 import { Input } from "./ui/input";
-import { FormFieldProps } from "./SignupForm";
+import { BasicFormFieldType } from "./SignupForm";
 
-export const SignupFormField: React.FC<FormFieldProps> = ({
+type InputProps = BasicFormFieldType & {
+  inputType?: string;
+};
+
+export const SignupFormField: React.FC<InputProps> = ({
   name,
   label,
   placeholder,
@@ -41,14 +45,13 @@ export const SignupFormField: React.FC<FormFieldProps> = ({
           <FormControl>
             <Input
               disabled={fetching ? true : undefined}
-              {...field}
               placeholder={placeholder}
-              defaultValue={field.value} // defaultValue prop으로 변경
+              defaultValue={field.value as string} // defaultValue prop으로 변경
               // disabled={field.disabled}
+              {...field}
             />
           </FormControl>
           {/* {description && <FormDescription>{description}</FormDescription>} */}
-          {/* description 대신에 errorMessage를 표시 */}
           {/* {errorMessage && <FormDescription>{errorMessage}</FormDescription>} */}
 
           <FormMessage />

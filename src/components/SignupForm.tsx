@@ -39,18 +39,24 @@ import { Separator } from "./ui/separator";
 import { toast } from "./ui/use-toast";
 import RadioGroupField from "./RadioGroupField";
 import SelectField from "./SelectField";
+import TextareaField from "./TextareaField";
+import SwitchField from "./SwitchField";
 
-export type FormFieldProps = {
+export type BasicFormFieldType = {
   name: FieldPath<FormSchemaType>;
   label: string;
+  inputType?: string;
   placeholder?: string;
   description?: string;
-  inputType?: string;
-  radioData?: RadioDataType;
-  selectData?: SelectDataType;
   fetching?: boolean;
   formControl: Control<FormSchemaType, any>;
   errors: FieldErrors<FieldValues>;
+};
+
+export type FormFieldProps = BasicFormFieldType & {
+  inputType?: string;
+  radioData?: RadioDataType;
+  selectData?: SelectDataType;
 };
 
 const radioData = [
@@ -144,6 +150,23 @@ const SignupForm = () => {
           label="Send to email"
           placeholder="Select a verified email to send new message"
           selectData={selectData}
+          fetching={fetching}
+          formControl={form.control}
+          errors={errors}
+        />
+
+        <TextareaField
+          name="body"
+          label="Body"
+          placeholder="Tell us a little bit about yourself"
+          fetching={fetching}
+          formControl={form.control}
+          errors={errors}
+        />
+
+        <SwitchField
+          name="airplaneMode"
+          label="Airplane Mode"
           fetching={fetching}
           formControl={form.control}
           errors={errors}

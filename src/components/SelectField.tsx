@@ -21,9 +21,13 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-import { FormFieldProps } from "./SignupForm";
+import { BasicFormFieldType } from "./SignupForm";
 
-const SelectField: React.FC<FormFieldProps> = ({
+type SelectFormFieldType = BasicFormFieldType & {
+  selectData: { val: string }[];
+};
+
+const SelectField: React.FC<SelectFormFieldType> = ({
   name,
   label,
   placeholder,
@@ -44,10 +48,10 @@ const SelectField: React.FC<FormFieldProps> = ({
           <FormControl>
             <Select
               disabled={fetching ? true : undefined}
-              {...field}
               onValueChange={field.onChange}
-              defaultValue={field.value}
+              defaultValue={field.value as string}
               //   disabled={field.disabled}
+              {...field}
             >
               <FormControl>
                 <SelectTrigger>

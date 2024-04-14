@@ -27,7 +27,14 @@ export const formSchema = z.object({
   sendToEmail: z.string({
     required_error: "Please select an email to send.",
   }),
-  // terms: z.boolean().default(false).optional(),
+  body: z.string({
+    required_error: "Tell us a little bit about yourself",
+  }),
+  airplaneMode: z.boolean({
+    required_error: "airplaneMode is required",
+    invalid_type_error: "airplaneMode must be a boolean",
+  }),
+  terms: z.boolean().default(false).optional(),
   // terms: z.boolean().default(false).optional() as CheckedState
   // .default(true, { message: "You must agree to the terms YOU BLOCKHEAD" })
 });

@@ -45,7 +45,6 @@ const CheckboxField: React.FC<FormFieldProps> = ({
           <FormControl>
             <Checkbox
               disabled={fetching ? true : undefined}
-              {...field}
               // checked={field.value as boolean}
               onCheckedChange={
                 field.onChange as (checked: CheckedState) => void
